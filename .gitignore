@@ -98,5 +98,5 @@ __blobstorage__
 __queuestorage__
 __azurite_db*__.json
 
-# VS Code FOlders
+# VS Code Folders
 .vs*/
