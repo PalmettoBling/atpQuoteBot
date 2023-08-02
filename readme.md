@@ -12,9 +12,12 @@ Collection of Azure Function bots for AT Protocol.
 ## Instillation
 
 Use npm install to install required libraries.
+
 Include the Environment Variables in the Functions App "Configuration" Settings, as well as your local .env file to test locally
+
 Update the 'function.json' file variable 'schedule' to fit your desired timing configuration using a 6 value cron expression 
 * {second} {minute} {hour} {day} {month} {day of the week}
+
 
 ## Learn More At:
 
