@@ -51,6 +51,9 @@ module.exports = async function (context, myTimer) {
         },
         createdAt: new Date().toISOString()
     };
+
+    const response = await agent.post(postRecord);
+    console.log('Posted:', response);
     
     if (myTimer.isPastDue)
     {
