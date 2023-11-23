@@ -1,5 +1,6 @@
 const { BskyAgent, RichText } = require("@atproto/api");
 const { createClient } = require("pexels");
+const { axios } = require("axios");
 
 module.exports = async function (context, myTimer) {
     var timeStamp = new Date().toISOString();
@@ -7,15 +8,11 @@ module.exports = async function (context, myTimer) {
     // establishing Pexels agent via atproto using environment secrets
     const client = createClient(`${process.env.PEXELSTOKEN}`);
     const query = 'wild mushrooms';
-    let chosenMushroom;
     
-    // Query to Pexels for mushroom photos
-    await client.photos.search({ query, per_page: 80 }).then(photos => {
-        context.log('photos:', photos);
-        let randomNumInLimit = Math.floor(Math.random() * (80 - 0 + 1)) + 0;
-        chosenMushroom = photos[randomNumInLimit];
-        context.log('chosen mushroom:', JSON.stringify(chosenMushroom));
-    });
+    let randomNumInLimit = Math.floor(Math.random() * (80 - 0 + 1)) + 0;
+    context.log('random number:', randomNumInLimit);
+    let randomMushroom = await client.photos.search({ query, per_page: 80 });
+    let chosenMushroom = randomMushroom.photos[randomNumInLimit];
 
     context.log('chosen mushroom:', JSON.stringify(chosenMushroom));
 
@@ -27,7 +24,8 @@ module.exports = async function (context, myTimer) {
     });
 
     const imageBlobRefs = [];
-    const imageBuffer = await Buffer.from(chosenMushroom.src.original);
+    const responseBuffer = await axios.get(chosenMushroom.src.original, { responseType: 'arraybuffer' });
+    const imageBuffer = Buffer.from(responseBuffer);
     const imageBlobResponse = await agent.uploadBlob({ blob: imageBuffer, encoding: 'image/png' });
     imageBlobRefs.push(imageBlobResponse.data.blob);
 
