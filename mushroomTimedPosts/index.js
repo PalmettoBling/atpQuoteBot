@@ -7,12 +7,14 @@ module.exports = async function (context, myTimer) {
     // establishing Pexels agent via atproto using environment secrets
     const pexelsClient = createClient(`process.env.PEXELSTOKEN`);
     const query = 'wild mushrooms';
-
+    let mushroomPhotos;
+    
     // Query to Pexels for mushroom photos
-    let { mushroomPhotos } = await pexelsClient.photos.search({ query, per_page: 1 });
-    // random number from results
-    let randomNumInLimit = Math.floor(Math.random() * (80 - 0 + 1)) + 0;
-    let chosenMushroom = mushroomPhotos.photos[randomNumInLimit];
+    client.photos.search({ query, per_page: 1 }).then(photos => {
+        let randomNumInLimit = Math.floor(Math.random() * (80 - 0 + 1)) + 0;
+        mushroomPhotos = photos[randomNumInLimit];
+    });
+    let chosenMushroom = mushroomPhotos;
 
     // establishing BlueSky agent via atproto using environment secrets
     const agent = new BskyAgent({service: "https://bsky.social"});
