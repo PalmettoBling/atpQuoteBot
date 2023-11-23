@@ -11,7 +11,7 @@ module.exports = async function (context, myTimer) {
     
     // Query to Pexels for mushroom photos
     await client.photos.search({ query, per_page: 1 }).then(photos => {
-        console.log('photos:', photos);
+        context.log('photos:', photos);
         let randomNumInLimit = Math.floor(Math.random() * (80 - 0 + 1)) + 0;
         chosenMushroom = photos[randomNumInLimit];
         context.log('chosen mushroom:', JSON.stringify(chosenMushroom));
