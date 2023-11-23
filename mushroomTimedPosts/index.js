@@ -11,9 +11,13 @@ module.exports = async function (context, myTimer) {
     
     // Query to Pexels for mushroom photos
     await client.photos.search({ query, per_page: 1 }).then(photos => {
+        console.log('photos:', photos);
         let randomNumInLimit = Math.floor(Math.random() * (80 - 0 + 1)) + 0;
         chosenMushroom = photos[randomNumInLimit];
+        context.log('chosen mushroom:', JSON.stringify(chosenMushroom));
     });
+
+    context.log('chosen mushroom:', JSON.stringify(chosenMushroom));
 
     // establishing BlueSky agent via atproto using environment secrets
     const agent = new BskyAgent({service: "https://bsky.social"});
@@ -53,7 +57,7 @@ module.exports = async function (context, myTimer) {
     };
 
     const response = await agent.post(postRecord);
-    console.log('Posted:', response);
+    context.log('Posted:', response);
     
     if (myTimer.isPastDue)
     {
