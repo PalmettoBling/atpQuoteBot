@@ -5,7 +5,7 @@ module.exports = async function (context, myTimer) {
     var timeStamp = new Date().toISOString();
 
     // establishing Pexels agent via atproto using environment secrets
-    const pexelsClient = createClient(`process.env.PEXELSTOKEN`);
+    const client = createClient(`process.env.PEXELSTOKEN`);
     const query = 'wild mushrooms';
     let chosenMushroom;
     
