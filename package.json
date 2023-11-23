@@ -9,7 +9,8 @@
     "@atproto/api": "^0.4.1",
     "@azure/cosmos": "^3.17.3",
     "debug": "^4.3.4",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "pexels": "^1.4.0"
   },
   "main": "index.js",
   "keywords": [],
