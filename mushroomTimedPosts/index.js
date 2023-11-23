@@ -1,11 +1,11 @@
 const { BskyAgent, RichText } = require("@atproto/api");
-const { pexelsAgent} = require("pexels");
+const { createClient } = require("pexels");
 
 module.exports = async function (context, myTimer) {
     var timeStamp = new Date().toISOString();
 
     // establishing Pexels agent via atproto using environment secrets
-    const pexelsClient = pexelsAgent(`process.env.PEXELSTOKEN`);
+    const pexelsClient = createClient(`process.env.PEXELSTOKEN`);
     const query = 'wild mushrooms';
 
     // Query to Pexels for mushroom photos
