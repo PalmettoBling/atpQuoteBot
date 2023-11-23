@@ -1,5 +1,5 @@
 const { BskyAgent, RichText } = require("@atproto/api");
-const { pexelsAgent} = require("@pexels");
+const { pexelsAgent} = require("pexels");
 
 module.exports = async function (context, myTimer) {
     var timeStamp = new Date().toISOString();
